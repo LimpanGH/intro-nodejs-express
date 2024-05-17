@@ -11,13 +11,13 @@ app.use(bodyparser.json())
 app.use(cors())
 
 // Routes - Endpoints - Behöver url + http-metod för att något ska triggas
-// Method GET
+// Method GET 
 app.get('/whatever', (req, res) => {
     // Det som triggas kalaas för "routehandler"
     res.send("Hello from route '/'")
 })
 
-// Method POST
+// Method POST 
 app.post('/whatever', (req, res) => {
 
     const {a, b} = req.body;
