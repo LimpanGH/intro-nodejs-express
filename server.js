@@ -1,40 +1,30 @@
-//const express = require("express") // Common.js moduler
-import express from "express" // ES6 modules, inkluder "type": "module" i package.json
-import bodyparser from "body-parser" 
-import cors from "cors"
+// Vi gjorde en npm init för att få en package.json-fil men det var visst onödigt
+// för det mesta vi behövde finns redan i node.js.
 
-const app = express()
-const PORT = process.env.PORT || 3000
+const http = require('http'); //Common.js modul-sättet
 
-// Middleware
-app.use(bodyparser.json())
-app.use(cors())
+const PORT = process.env.PORT || 3000;
 
-// Routes - Endpoints - Behöver url + http-metod för att något ska triggas
-// Method GET 
-app.get('/whatever', (req, res) => {
-    // Det som triggas kalaas för "routehandler"
-    res.send("Hello from route '/'")
-})
+const server = http.createServer(async (req, res) => {
+  if (req.method === 'GET' && req.url === '/') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.write(JSON.stringify({ message: 'Hello from server!' }));
+    res.end();
+    return;
+  }
 
-// Method POST 
-app.post('/whatever', (req, res) => {
+  res.writeHead(404, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify({ message: 'Route not found' }));
+});
 
-    const {a, b} = req.body;
-    res.json({"first": a, "second": b });    
-})
+server.listen(PORT, () => {
+  console.log(`Server on http://localhost:${PORT}`);
+});
 
-//Method PUT
-app.put('/whatever', (req, res) => {
-    res.send("A PUT-request")
-})
-
-//Method DELETE
-app.delete('/whatever', (req, res) => {
-    res.send('A DELETE-request')
-})
-
-
-app.listen(PORT, () => {
-    console.log(`Servern kör på http://localhost:${PORT}`)
-})
+// I you run node server.json in the terminal and go to http://localhost:3000/ in the browser, you should see:
+// 20240514110945
+// http://localhost:3000/
+//
+// {
+//     "message": "Hello from server!"
+//   }
