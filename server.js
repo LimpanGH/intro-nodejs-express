@@ -1,3 +1,5 @@
+// Det här är en vanilla version utan Express eller andra ramverk.
+
 // Vi gjorde en npm init för att få en package.json-fil men det var visst onödigt
 // för det mesta vi behövde finns redan i node.js.
 
