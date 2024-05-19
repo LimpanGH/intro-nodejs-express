@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyparser.json());
 app.use(cors());
 
-// Routes - Endpoints - Behöver url + http-metod för att något ska triggas ⬇ --------------------------
+// Routes (Endpoints), behöver url + http-metod för att något ska triggas ⬇ --------------------------
 
 // Method GET
 app.get('/', (req, res) => {
@@ -33,7 +33,7 @@ app.post('/whatever', (req, res) => {
 //   "password": "lösenord"
 // }
 
-//Method PUT
+//Method PUT (replaces all) or PATCH (replaces just the part that has been changed).
 app.put('/whatever', (req, res) => {
   res.send('A PUT-request');
 });
